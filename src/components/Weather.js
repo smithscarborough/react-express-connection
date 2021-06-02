@@ -5,23 +5,25 @@ export default class Weather extends Component {
     constructor() {
         super()
         this.state = {
-            weather: 'No weather found yet.'
+            weather: 'Pending button click...'
         };
     }
 
-    componentDidMount = () => {
+    handleClick = () => {
         axios.get('/HoustonWeather').then(response => {
-            console.log(response.data);
+            // console.log(response.data);
+            this.setState({
+                weather: response.data.temperatureFahrenheit
+            })
         }); 
     };
 
     render() {
         return (
             <div>
-                <button>Get weather in Houston</button>
+                <button onClick={this.handleClick}>Get weather in Houston</button>
                 <h1>The weather in Houston is: {this.state.weather}</h1>
             </div>
         )
     }
 }
- 
